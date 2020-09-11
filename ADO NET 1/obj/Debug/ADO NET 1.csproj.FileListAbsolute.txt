@@ -1,0 +1,10 @@
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\bin\Debug\ADO NET 1.exe.config
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\bin\Debug\ADO NET 1.exe
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\bin\Debug\ADO NET 1.pdb
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO NET 1.csprojAssemblyReference.cache
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO_NET_1.Form1.resources
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO_NET_1.Properties.Resources.resources
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO NET 1.csproj.GenerateResource.cache
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO NET 1.csproj.CoreCompileInputs.cache
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO NET 1.exe
+E:\VS Projects\Windows Forms\ADO NET 1\ADO NET 1\obj\Debug\ADO NET 1.pdb
