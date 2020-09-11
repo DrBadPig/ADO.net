@@ -28,9 +28,9 @@ namespace ADO_NET_1.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-VP8GUDK\\SQLEXPRESS;Initial Catalog=pubs;Integrated Security=T" +
             "rue")]
-        public string Параметр {
+        public string ConfigMan {
             get {
-                return ((string)(this["Параметр"]));
+                return ((string)(this["ConfigMan"]));
             }
         }
     }

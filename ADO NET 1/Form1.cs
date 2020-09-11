@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace ADO_NET_1
 {
@@ -18,15 +21,21 @@ namespace ADO_NET_1
         Dictionary<string, int> verbs = new Dictionary<string, int>();
         Dictionary<string, int> adjs = new Dictionary<string, int>();
 
+        SqlConnection cn;
+
         public Form1()
         {
             InitializeComponent();
+
+            cn = new SqlConnection();
+            string connection = ConfigurationManager.ConnectionStrings["ADO_NET_1.Properties.Settings.ConfigMan"].ConnectionString;
+
+            cn.ConnectionString = connection;
         }
 
         private void buttonTableHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("It will be created new table in your database. " +
-                "If table with name you chose already exists, it will be deleted. Sucks",
+            MessageBox.Show("It will be created new table in your database. ",
                 "Hey you, wait a minute", MessageBoxButtons.OK);
         }
 
@@ -124,7 +133,7 @@ namespace ADO_NET_1
             {
                 if (item.Length > 3)
                 {
-                    if ((item[item.Length - 1] == 'й' && item[item.Length - 2] == 'ы') 
+                    if ((item[item.Length - 1] == 'й' && item[item.Length - 2] == 'ы')
                     ||
                     (item[item.Length - 1] == 'й' && item[item.Length - 2] == 'и')
                     ||
@@ -169,9 +178,12 @@ namespace ADO_NET_1
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
+            verbs.Clear();
+            adjs.Clear();
             if (textBoxTableName.Text.Length > 0 && comboSearchType.SelectedItem != null && path != null)
             {
-                switch (comboSearchType.SelectedItem.ToString())
+                string type = comboSearchType.SelectedItem.ToString();
+                switch (type)
                 {
                     case "Verbs":
                         CheckAllFiles(path, "v");
@@ -180,6 +192,46 @@ namespace ADO_NET_1
                         CheckAllFiles(path, "a");
                         break;
                 }
+
+
+                cn.Open();
+
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.Connection = cn;
+                cmd.CommandText = "create table " + textBoxTableName.Text + "(id int, word nvarchar(20), count int)";
+
+                cmd.ExecuteNonQuery();
+
+                int id;
+
+                switch (type)
+                {
+                    case "Verbs":
+                        id = 0;
+                        foreach (var item in verbs)
+                        {
+                            cmd.CommandText = $"insert into " + textBoxTableName.Text + 
+                                "(id, word, count) " + $"values ({id}, N'{item.Key}', {item.Value})";
+                            cmd.ExecuteNonQuery();
+                            id++;
+                        }
+
+                        break;
+                    case "Adjectives":
+                        id = 0;
+                        foreach (var item in adjs)
+                        {
+                            cmd.CommandText = $"insert into " + textBoxTableName.Text +
+                                "(id, word, count) " + $"values ({id}, N'{item.Key}', {item.Value})";
+                            cmd.ExecuteNonQuery();
+                            id++;
+                        }
+
+                        break;
+                }
+
+                cn.Close();
             }
         }
     }
